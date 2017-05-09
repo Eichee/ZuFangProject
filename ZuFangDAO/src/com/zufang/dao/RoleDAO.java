@@ -144,6 +144,24 @@ public class RoleDAO {
 		}
 	}
 	
+	public RoleDTO[] getAllNotDeleted(){
+		List<RoleDTO> list=new ArrayList<>();
+		ResultSet rs=null;
+		try{
+			rs=JdbcUtils.executeQuery("select * from T_Roles where IsDeleted=0");
+			while(rs.next()){
+				list.add(toDTO(rs));
+			}
+			return list.toArray(new RoleDTO[list.size()]);
+		}
+		catch(SQLException ex){
+			throw new RuntimeException(ex);
+		}
+		finally{
+			JdbcUtils.closeAll(rs);
+		}
+	}
+	
 	private RoleDTO toDTO(ResultSet rs) throws SQLException {
 		RoleDTO dto=new RoleDTO();
 		dto.setDeleted(rs.getBoolean("IsDeleted"));

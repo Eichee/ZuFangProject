@@ -1,13 +1,16 @@
 package com.zufang.service;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import com.zufang.dao.RoleDAO;
+import com.zufang.dao.utils.JdbcUtils;
 import com.zufang.dto.RoleDTO;
 
 public class RoleService {
 	
 	RoleDAO roleDAO=new RoleDAO();
+	
 	
 	/**
 	 *  add role
@@ -65,6 +68,9 @@ public class RoleService {
 		return roleDAO.getAll();
 	}
 	
+	public RoleDTO[] getAllNotDeleted(){
+		return roleDAO.getAllNotDeleted();
+	}
 	
 	/**
 	 * add roles to adminuser

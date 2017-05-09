@@ -1,6 +1,8 @@
 package com.zufang.service;
 
 
+import java.sql.Connection;
+
 import com.zufang.dao.PermissionDAO;
 import com.zufang.dto.PermissionDTO;
 
@@ -23,5 +25,16 @@ public class PermissionService {
 		return permissionDAO.getByRoleId(roleId);
 	}
 	
+	public void updatePermIds(long roleId,long[] permIds){
+		permissionDAO.updatePermIds(roleId, permIds);
+	}
+	
+	public void addPermIds(Connection conn,long roleId,long[] permIds){
+		permissionDAO.addPermIds(conn, roleId, permIds);
+	}
+	
+	public void addPermIds(long roleId,long[] permIds){
+		 permissionDAO.addPermIds(roleId, permIds);
+	}
 	
 }

@@ -2,14 +2,35 @@ package com.zufang.tools;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class CommonUtils {
+	
+	/**
+	 * convert array to list
+	 * @param array
+	 */
+	public static List<Object> toList(Object array){
+		if (!array.getClass().isArray()) {
+			throw new IllegalArgumentException("parameter is not array");
+		}
+		List<Object> list=new ArrayList<>();
+		int len=Array.getLength(array);
+		for (int i = 0; i < len; i++) {
+			Object obj=Array.get(array, i);
+			list.add(obj);
+		}
+		return list;
+	}
+	
 	
 	public static Gson createGson(){
 		return new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();

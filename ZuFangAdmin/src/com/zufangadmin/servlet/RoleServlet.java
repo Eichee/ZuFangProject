@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.google.gson.LongSerializationPolicy;
+import com.zufang.dao.RoleDAO;
 import com.zufang.dto.PermissionDTO;
 import com.zufang.dto.RoleDTO;
 import com.zufang.service.PermissionService;
@@ -27,7 +29,7 @@ public class RoleServlet extends BasicServlet {
 	public void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			RoleService roleService = new RoleService();
-			RoleDTO[] roles = roleService.getAll();
+			RoleDTO[] roles = roleService.getAllNotDeleted();
 			request.setAttribute("roles", roles);
 			request.getRequestDispatcher("/WEB-INF/role/roleList.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
@@ -62,4 +64,47 @@ public class RoleServlet extends BasicServlet {
 		writeJson(response, new AjaxResult("ok"));
 		
 	}
+	
+	@HasPermission("Role.Edit")
+	public void edit(HttpServletRequest req,HttpServletResponse resp) throws IOException, ServletException{
+		long roleId=Long.parseLong(req.getParameter("roleId"));
+		RoleService roleService=new RoleService();
+		RoleDTO role=roleService.getById(roleId);
+		if (role==null) {
+			writeJson(resp, new AjaxResult("error", "failed to search the role"));
+			return;
+		}
+		req.setAttribute("role", role);
+		
+		PermissionService permService=new PermissionService();
+		PermissionDTO[] allPerms=permService.getAll();
+		req.setAttribute("permissions", allPerms);
+		
+		PermissionDTO[] rolePerms=permService.getByRoleId(roleId);
+		long[] rolePermIds=new long[rolePerms.length];
+		for (int i = 0; i < rolePermIds.length; i++) {
+			rolePermIds[i]=rolePerms[i].getId();
+		}
+		req.setAttribute("rolePermIds", rolePermIds);
+		
+		req.getRequestDispatcher("/WEB-INF/role/roleEdit.jsp").forward(req, resp);
+		
+	}
+	
+	@HasPermission("Role.Edit")
+	public void editSubmit(HttpServletRequest req,HttpServletResponse resp) throws IOException {
+		long roleId=Long.parseLong(req.getParameter("roleId"));
+		String roleName=req.getParameter("roleName");
+		String[] permIds=req.getParameterValues("permId");	
+		
+		RoleService roleService=new RoleService();
+		roleService.update(roleId, roleName);
+		
+		PermissionService permService=new PermissionService();
+		permService.updatePermIds(roleId, CommonUtils.toLongArray(permIds));
+		
+		writeJson(resp, new AjaxResult("ok"));
+	}
+	
+	
 }

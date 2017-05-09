@@ -1,5 +1,6 @@
 package com.zufang.dao;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,7 +10,58 @@ import com.zufang.dao.utils.JdbcUtils;
 import com.zufang.dto.PermissionDTO;
 
 public class PermissionDAO {
-
+	
+	public void updatePermIds(long roleId,long[] permIds){
+		Connection conn=null;
+		try{
+			conn=JdbcUtils.getConnection();
+			conn.setAutoCommit(false);
+			JdbcUtils.executeNonQuery(conn, "delete from T_RolePermissions where RoleId=?", roleId);
+			addPermIds(conn, roleId, permIds);
+			conn.commit();
+		}
+		catch(SQLException e){
+			JdbcUtils.rollback(conn);
+			throw new RuntimeException(e);
+		}
+		finally{
+			JdbcUtils.closeQuietly(conn);
+		}
+	}
+	
+	public void addPermIds(Connection conn,long roleId,long[] permIds){
+		try{
+			conn.setAutoCommit(false);
+			for (long permId : permIds) {
+				JdbcUtils.executeNonQuery(conn, "insert into T_RolePermissions(RoleId,PermissionId) values(?,?)", roleId,permId);
+			}
+			conn.commit();
+		}
+		catch(SQLException e){
+			JdbcUtils.rollback(conn);
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public void addPermIds(long roleId,long[] permIds){
+		Connection conn=null;
+		try{
+			conn=JdbcUtils.getConnection();
+			for (long permId : permIds) {
+				JdbcUtils.executeNonQuery(conn, "insert into T_RolePermissions(RoleId,PermissionId) values(?,?)", roleId,permId);
+			}
+			conn.commit();
+		}
+		catch(SQLException e){
+			JdbcUtils.rollback(conn);
+			throw new RuntimeException(e);
+		}
+		finally{
+			JdbcUtils.closeQuietly(conn);
+		}
+	}
+	
+	
 	public PermissionDTO getById(long id){
 		ResultSet rs=null;
 		try {
