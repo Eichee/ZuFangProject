@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="ZuFangAdmin">
+        <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
+        <dependent-module archiveName="ZuFangTools.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ZuFangTools/ZuFangTools">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ZuFangService.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ZuFangService/ZuFangService">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ZuFangDTO.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ZuFangDTO/ZuFangDTO">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ZuFangDAO.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ZuFangDAO/ZuFangDAO">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="ZuFangAdmin"/>
+        <property name="java-output-path" value="/ZuFangAdmin/WebRoot/WEB-INF/classes"/>
+    </wb-module>
+</project-modules>
