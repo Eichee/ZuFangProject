@@ -166,7 +166,7 @@ public class AdminUserDAO {
 	public AdminUserDTO[] getAll(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("select u.*,c.Name cityName from T_AdminUsers u \n");
-		sb.append("left join T_cities c on u.CityId=c.Id where u.IsDeleted=0 \n");
+		sb.append("left join T_cities c on u.CityId=c.Id where u.IsDeleted=0 order by u.id \n");
 
 		List<AdminUserDTO> list = new ArrayList<>();
 		ResultSet rs = null;
