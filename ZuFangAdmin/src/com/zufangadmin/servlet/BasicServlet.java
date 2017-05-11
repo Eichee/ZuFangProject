@@ -18,6 +18,7 @@ import com.zufang.tools.AjaxResult;
 import com.zufangadmin.utils.AdminUtils;
 
 
+
 public class BasicServlet extends HttpServlet {
 	private static final Logger logger=LogManager.getLogger(BasicServlet.class);
 	
