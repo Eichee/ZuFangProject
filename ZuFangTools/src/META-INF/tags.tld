@@ -32,4 +32,77 @@
   	  </attribute> 	     	  
   </tag> 
   
+  
+  <tag>
+  	  <name>select</name>
+  	  <tag-class>com.zufang.tools.SelectTag</tag-class>
+  	  <body-content>empty</body-content>
+  	   <attribute>
+  	  	  <name>id</name>
+  	  	  <required>true</required>
+  	  	  <rtexprvalue>true</rtexprvalue>
+  	  </attribute>
+  	  <attribute>
+  	  	  <name>name</name>
+  	  	  <required>true</required>
+  	  	  <rtexprvalue>true</rtexprvalue>
+  	  </attribute>
+  	  <attribute>
+  	  	  <name>txtName</name>
+  	  	  <required>true</required>
+  	  	  <rtexprvalue>true</rtexprvalue>
+  	  </attribute> 	    
+  	  <attribute>
+  	  	  <name>valueName</name>
+  	  	  <required>true</required>
+  	  	  <rtexprvalue>true</rtexprvalue>
+  	  </attribute> 	 
+  	  <attribute>
+  	  	  <name>items</name>
+  	  	  <required>true</required>
+  	  	  <rtexprvalue>true</rtexprvalue>
+  	  </attribute>
+  	  <attribute>
+  	  	  <name>selectedValue</name>
+  	  	  <required>false</required>
+  	  	  <rtexprvalue>true</rtexprvalue>
+  	  </attribute> 	 
+  	  <attribute>
+  	  	  <name>attributes</name>
+  	  	  <required>false</required>
+  	  	  <rtexprvalue>true</rtexprvalue>
+  	  </attribute> 		    	  
+  </tag> 
+  
+  <tag>
+  	<name>checkbox</name>
+  	  <tag-class>com.zufang.tools.CheckBoxTag</tag-class>
+  	  <body-content>empty</body-content>
+  	   <attribute>
+  	  	  <name>id</name>
+  	  	  <required>false</required>
+  	  	  <rtexprvalue>true</rtexprvalue>
+  	  </attribute>
+  	  <attribute>
+  	  	  <name>name</name>
+  	  	  <required>true</required>
+  	  	  <rtexprvalue>true</rtexprvalue>
+  	  </attribute>
+  	  <attribute>
+  	  	  <name>value</name>
+  	  	  <required>true</required>
+  	  	  <rtexprvalue>true</rtexprvalue>
+  	  </attribute>
+  	  <attribute>
+  	  	  <name>label</name>
+  	  	  <required>true</required>
+  	  	  <rtexprvalue>true</rtexprvalue>
+  	  </attribute>
+  	  <attribute>
+  	  	  <name>checked</name>  	  	  
+  	  	  <required>false</required>
+  	  	  <rtexprvalue>true</rtexprvalue>
+  	  	  <type>java.lang.Boolean</type>
+  	  </attribute>
+  </tag>
 </taglib>

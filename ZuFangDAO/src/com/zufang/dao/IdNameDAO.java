@@ -60,11 +60,11 @@ public class IdNameDAO {
 	 * 查询所有
 	 * @return
 	 */
-	public IdNameDTO[] getAll(){
+	public IdNameDTO[] getAll(String typeName){
 		List<IdNameDTO> list=new ArrayList<IdNameDTO>();
 		ResultSet rs=null;
 		try {
-			rs=JdbcUtils.executeQuery("select * from T_IdNames ");
+			rs=JdbcUtils.executeQuery("select * from T_IdNames where typeName=? ",typeName);
 			while (rs.next()) {
 				list.add(toDTO(rs));				
 			}

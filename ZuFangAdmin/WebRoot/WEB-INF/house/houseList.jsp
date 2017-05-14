@@ -4,7 +4,7 @@
 <%@ taglib prefix="zf" uri="http://java.zufang.com/jsp/jstl/tags" %>
 <%@include file="/WEB-INF/header.jsp" %>
    
-    <title>角色管理</title>
+    <title>房源管理</title>
 </head>
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 角色管理 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
@@ -12,8 +12,8 @@
 	<div class="cl pd-5 bg-1 bk-gray"> 
 	<span class="l"> 
 		<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-	 	<a class="btn btn-primary radius" href="javascript:;" onclick="admin_role_add('添加角色','<%=ctxPath%>/role?action=add','800')">
-	 	<i class="Hui-iconfont">&#xe600;</i> 添加角色</a> </span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
+	 	<a class="btn btn-primary radius" href="javascript:;" onclick="house_add('添加房源','<%=ctxPath%>/house?action=add&typeId=${typeId }','800','600')">
+	 	<i class="Hui-iconfont">&#xe600;</i> 添加房源</a> </span> </div>
 	<table class="table table-border table-bordered table-hover table-bg">
 		<thead>
 			<tr>

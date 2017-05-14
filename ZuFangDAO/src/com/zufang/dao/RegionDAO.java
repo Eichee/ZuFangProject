@@ -57,4 +57,24 @@ public class RegionDAO {
 		}
 		
 	}
+	
+	public RegionDTO[] getAll(long cityId){
+		ResultSet rs=null;
+		List<RegionDTO> list=new ArrayList<RegionDTO>();
+		try {
+			rs=JdbcUtils.executeQuery("select * from T_Regions where cityId=?",cityId);
+			while(rs.next())
+			{
+				list.add(toDTO(rs));
+			}
+			return list.toArray(new RegionDTO[list.size()]);
+		}
+		catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		finally{
+			JdbcUtils.closeAll(rs);
+		}
+		
+	}
 }
