@@ -2,6 +2,18 @@
     <wb-module deploy-name="ZuFangFront">
         <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="ZuFangDAO.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ZuFangDAO/ZuFangDAO">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ZuFangTools.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ZuFangTools/ZuFangTools">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ZuFangService.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ZuFangService/ZuFangService">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ZuFangDTO.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ZuFangDTO/ZuFangDTO">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="ZuFangFront"/>
         <property name="java-output-path" value="/ZuFangFront/WebRoot/WEB-INF/classes"/>
     </wb-module>
