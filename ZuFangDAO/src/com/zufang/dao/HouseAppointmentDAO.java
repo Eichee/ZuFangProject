@@ -13,6 +13,25 @@ import com.zufang.dto.HouseAppointmentDTO;
 public class HouseAppointmentDAO {
 
 	/**
+	 * 返回所有预约订单的数量
+	 * @return
+	 */
+	public long getTotalCount(){
+		StringBuilder sb=new StringBuilder();
+		sb.append(" select count(1) from t_houseappointments app");
+		Number number;
+		try{
+			number=(Number)JdbcUtils.executeQuery(sb.toString());			
+		}
+		catch(SQLException e){
+			throw new RuntimeException(e);
+		}
+		return number.longValue();
+	}
+	
+	
+	
+	/**
 	 * 分页查询
 	 * @param cityId
 	 * @param status

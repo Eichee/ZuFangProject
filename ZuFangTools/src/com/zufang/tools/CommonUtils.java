@@ -2,8 +2,10 @@ package com.zufang.tools;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
 import java.math.BigInteger;
+import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -95,5 +97,13 @@ public class CommonUtils {
 			longArray[i]=Long.parseLong(strs[i]);
 		}
 		return longArray;
+	}
+	
+	public static String urlEncodeUTF8(String url){
+		try {
+			return URLEncoder.encode(url, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }
