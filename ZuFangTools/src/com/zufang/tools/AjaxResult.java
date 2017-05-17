@@ -1,7 +1,7 @@
 package com.zufang.tools;
 
 public class AjaxResult {
-	private String status;//
+	private String status;// ok  error
 	private String msg; // 
 	private Object data; // 
 

@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.zufang.front.utils.FrontUtils;
+import com.zufang.tools.AjaxResult;
 
 public class BasicServlet extends HttpServlet {
 	
@@ -47,6 +48,11 @@ public class BasicServlet extends HttpServlet {
 		catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+	
+	protected void writeJson(HttpServletResponse resp,AjaxResult ajaxResult) throws IOException {
+		resp.setContentType("application/json");
+		resp.getWriter().print(ajaxResult.toJson());
 	}
 	
 }

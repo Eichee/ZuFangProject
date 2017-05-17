@@ -22,4 +22,12 @@ public class FrontUtils {
 		return jedisPool.getResource();
 	}
 	
+	
+	public static void setCurrentUserId(HttpServletRequest req,Long userId){
+		req.getSession().setAttribute("UserId", userId);
+	}
+	
+	public static Long getCurrentUserId(HttpServletRequest req){
+		return (Long)req.getSession().getAttribute("UserId");
+	}
 }

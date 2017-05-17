@@ -3,6 +3,7 @@ package com.zufang.front.servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,6 +12,7 @@ import com.zufang.front.utils.CacheManager;
 import com.zufang.service.CityService;
 import com.zufang.service.HouseAppointmentService;
 
+@WebServlet("/Index")
 public class IndexServlet extends BasicServlet {
 
 	private static final String citiesKey="Cities";

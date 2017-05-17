@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+		String ctxPath=request.getContextPath();
+	%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -8,23 +11,26 @@
    
     <meta name="keywords" content="">
     <meta name="description" content="">
+        <script type="text/javascript" src="<%=ctxPath %>/js/jquery-1.8.3.min.js" ></script>
     <script src="js/rem.js"></script> 
-    <script src="js/jquery.min.js" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="css/base.css"/>
-    <link rel="stylesheet" type="text/css" href="css/page.css"/>
-    <link rel="stylesheet" type="text/css" href="css/all.css"/>
-    <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
-    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+    <script src="<%=ctxPath %>/js/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="<%=ctxPath %>/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=ctxPath %>/css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=ctxPath %>/css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=ctxPath %>/css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=ctxPath %>/css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=ctxPath %>/css/loading.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=ctxPath %>/slick/slick.css"/>
     
-    <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
-	<script src="js/fastclick.js"></script>
-	<script src="js/mui.min.js"></script>
-	<script type="text/javascript" src="js/hmt.js" ></script>
+    <script type="text/javascript" src="<%= ctxPath%>/js/layer.js"></script>
+
+	<script src="<%=ctxPath %>/js/fastclick.js"></script>
+	<script src="<%=ctxPath %>/js/mui.min.js"></script>
+	
+</html>
 	<!--插件-->
-	<link rel="stylesheet" href="css/swiper.min.css">
-	<script src="js/swiper.jquery.min.js"></script>
+	<link rel="stylesheet" href="<%=ctxPath %>/css/swiper.min.css">
+	<script src="<%=ctxPath %>/js/swiper.jquery.min.js"></script>
 	
 	<script type="text/javascript">
 		$(window).load(function(){
