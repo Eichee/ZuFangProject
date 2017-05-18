@@ -82,10 +82,10 @@
 				class="shuru fl" placeholder="请输入手机号码" />
 			</li>
 			<li class="clearfloat">
-				<p class="tit fl">验证码</p> <input type="text" id="" value=""
+				<p class="tit fl">验证码</p> <input type="text" id="smsCode" value=""
 				class="shuru shurutwo fl" placeholder="请输入短信验证码" /> <a
 				href="#loginmodalt" id="modaltrigger"> <input type="button"
-					id="smsCode" value="获取短信验证码" class="btn fr" />
+					id="" value="获取短信验证码" class="btn fr" />
 			</a>
 			</li>
 			<li class="clearfloat">

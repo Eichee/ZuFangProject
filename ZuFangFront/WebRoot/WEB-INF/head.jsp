@@ -27,6 +27,12 @@
 	<script src="<%=ctxPath %>/js/fastclick.js"></script>
 	<script src="<%=ctxPath %>/js/mui.min.js"></script>
 	
+	<script type="text/javascript" src="<%=ctxPath %>/js/jquery.SuperSlide.2.1.js" ></script>
+	<script type="text/javascript" src="<%=ctxPath %>/js/hmt.js" ></script>
+	 
+	<script type="text/javascript" src="<%=ctxPath %>/slick/slick.min.js" ></script>
+	<script type="text/javascript" src="<%=ctxPath %>/js/jquery.leanModal.min.js"></script>
+	<script type="text/javascript" src="<%=ctxPath %>/js/tchuang.js" ></script>
 </html>
 	<!--插件-->
 	<link rel="stylesheet" href="<%=ctxPath %>/css/swiper.min.css">

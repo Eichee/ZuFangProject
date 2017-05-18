@@ -30,6 +30,7 @@ public class RupengSMSAPI {
 		try{
 			String resp=IOUtils.toString(new URL(sendUrl),"UTF-8");
 			Gson gson=CommonUtils.createGson();
+			System.out.println(code);
 			return gson.fromJson(resp,RupengSMSResult.class);
 		}
 		catch(IOException e){
