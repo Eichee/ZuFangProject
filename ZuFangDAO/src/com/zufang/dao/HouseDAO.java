@@ -6,11 +6,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.plaf.SliderUI;
+
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.zufang.dao.utils.JdbcUtils;
 import com.zufang.dto.HouseDTO;
 import com.zufang.dto.HousePicDTO;
+import com.zufang.dto.HouseSearchOptions;
+import com.zufang.dto.HouseSearchOptions.OrderByType;
+import com.zufang.dto.HouseSearchResult;
 
 
 
@@ -305,138 +311,76 @@ public class HouseDAO {
 		}
 	}
 	
-	//升级版搜索
-//	public HouseSearchResult search2(HouseSearchOptions options) {
-//		
-//		HouseSearchResult result= new HouseSearchResult();
-//		
-//		StringBuilder sbSelect = new StringBuilder();
-//		sbSelect.append(selectMainSQL);
-//		sbSelect.append("where h.IsDeleted=0 and city.Id=?\n");
-//
-//		ArrayList<Object> listParams = new ArrayList<>();// 参数
-//		listParams.add(options.getCityId());
-//
-//		if (options.getEndMonthRent() != null) {
-//			sbSelect.append("and h.MonthRent<=?\n");
-//			listParams.add(options.getEndMonthRent());
-//		}
-//		if (options.getStartMonthRent() != null) {
-//			sbSelect.append("and h.MonthRent>=?\n");
-//			listParams.add(options.getStartMonthRent());
-//		}
-//		if (!StringUtils.isEmpty(options.getKeywords())) {
-//			// namelike '%?%'
-//			sbSelect.append("and community.Name like ?\n");// 根据小区名字模糊搜索
-//			listParams.add("%" + options.getKeywords() + "%");
-//		}
-//		if (options.getRegionId() != null) {
-//			sbSelect.append("and h.RegionId=?\n");
-//			listParams.add(options.getRegionId());
-//		}
-//		if (options.getTypeId() != null) {
-//			sbSelect.append("and h.TypeId=?\n");
-//			listParams.add(options.getTypeId());
-//		}
-//
-//		// todo:可以让用户选择“面积从大到小、面积从小到大、租金从大到小、租金从小到大”
-//		if (options.getOrderByType() == OrderByType.Area) {
-//			sbSelect.append("order by h.Area ASC\n");
-//		} else if (options.getOrderByType() == OrderByType.MonthRent) {
-//			sbSelect.append("order by h.MonthRent ASC\n");
-//		}
-//		
-//		//查询满足条件的数据的条数
-//		Number totalCount;
-//		try {
-//			//一个小技巧，重复使用sbSelect达到“顺路查询宗数据条数”的目的
-//			totalCount = (Number)JdbcUtils.querySingle("select count(*) from ("+sbSelect+") v", listParams.toArray());
-//		} catch (SQLException e1) {
-//			throw new RuntimeException(e1);
-//		}
-//		result.setTotalCount(totalCount.longValue());
-//		
-//		sbSelect.append("limit ?,?\n");
-//		listParams.add((options.getCurrentIndex() - 1) * options.getPageSize());
-//		listParams.add(options.getPageSize());
-//
-//		ArrayList<HouseDTO> houses = new ArrayList<>();
-//		ResultSet rs = null;
-//
-//		try {
-//			//可变长度参数本质上就是数组，所以可以直接listParams.toArray()赋值
-//			Object[] params = listParams.toArray();
-//			rs = JdbcUtils.executeQuery(sbSelect.toString(), params);//new Object[]{params}
-//			while (rs.next()) {
-//				houses.add(toDTO(rs));
-//			}
-//			result.setResult(houses.toArray(new HouseDTO[houses.size()]));
-//		} catch (SQLException e) {
-//			throw new RuntimeException(e);
-//		}
-//		finally{
-//			JdbcUtils.closeAll(rs);
-//		}
-//		return result;
-//	}
-//
-//	public HouseDTO[] search(HouseSearchOptions options) {
-//		StringBuilder sbSelect = new StringBuilder();
-//		sbSelect.append(selectMainSQL);
-//		sbSelect.append("where h.IsDeleted=0 and city.Id=?\n");
-//
-//		ArrayList<Object> listParams = new ArrayList<>();// 参数
-//		listParams.add(options.getCityId());
-//
-//		if (options.getEndMonthRent() != null) {
-//			sbSelect.append("and h.MonthRent<=?\n");
-//			listParams.add(options.getEndMonthRent());
-//		}
-//		if (options.getStartMonthRent() != null) {
-//			sbSelect.append("and h.MonthRent>=?\n");
-//			listParams.add(options.getStartMonthRent());
-//		}
-//		if (!StringUtils.isEmpty(options.getKeywords())) {
-//			sbSelect.append("and community.Name like ?\n");// 根据小区名字模糊搜索
-//			listParams.add("%" + options.getKeywords() + "%");
-//		}
-//		if (options.getRegionId() != null) {
-//			sbSelect.append("and h.RegionId=?\n");
-//			listParams.add(options.getRegionId());
-//		}
-//		if (options.getTypeId() != null) {
-//			sbSelect.append("and h.TypeId=?\n");
-//			listParams.add(options.getTypeId());
-//		}
-//
-//		// todo:可以让用户选择“面积从大到小、面积从小到大、租金从大到小、租金从小到大”
-//		if (options.getOrderByType() == OrderByType.Area) {
-//			sbSelect.append("order by h.Area ASC\n");
-//		} else if (options.getOrderByType() == OrderByType.MonthRent) {
-//			sbSelect.append("order by h.MonthRent ASC\n");
-//		}
-//		sbSelect.append("limit ?,?\n");
-//		listParams.add((options.getCurrentIndex() - 1) * options.getPageSize());
-//		listParams.add(options.getPageSize());
-//
-//		ArrayList<HouseDTO> houses = new ArrayList<>();
-//		ResultSet rs = null;
-//
-//		try {
-//			//可变长度参数本质上就是数组，所以可以直接listParams.toArray()赋值
-//			Object[] params = listParams.toArray();
-//			rs = JdbcUtils.executeQuery(sbSelect.toString(), params);//new Object[]{params}
-//			while (rs.next()) {
-//				houses.add(toDTO(rs));
-//			}
-//			return houses.toArray(new HouseDTO[houses.size()]);
-//		} catch (SQLException e) {
-//			throw new RuntimeException(e);
-//		}
-//		finally{
-//			JdbcUtils.closeAll(rs);
-//		}
-//
-//	}
+	public HouseSearchResult search(HouseSearchOptions options){
+		HouseSearchResult result=new HouseSearchResult();
+		StringBuilder sbSelect=new StringBuilder();
+		sbSelect.append(selectMainSQL);
+		sbSelect.append("where h.IsDeleted=0 and city.Id=?\n");
+		
+		ArrayList<Object> listParams=new ArrayList<>();
+		listParams.add(options.getCityId());
+		
+		if (options.getEndMonthRent()!=null) {
+			sbSelect.append("and h.MonthRent<=?\n");
+			listParams.add(options.getEndMonthRent());
+		}
+		
+		if (options.getStartMonthRent()!=null) {
+			sbSelect.append(" and h.MonthRent>=?\n");
+			listParams.add(options.getStartMonthRent());
+		}
+		
+		if (!StringUtils.isEmpty(options.getKeywords())) {
+			sbSelect.append(" and community.Name like ?\n");
+			listParams.add("%"+options.getKeywords()+"%");
+		}
+		
+		if (options.getRegionId()!=null) {
+			sbSelect.append("and h.RegionId=?\n");
+			listParams.add(options.getRegionId());
+		}
+		
+		if (options.getTypeId()!=null) {
+			sbSelect.append(" and h.TypeId=?\n");
+			listParams.add(options.getTypeId());
+		}
+		
+		if (options.getOrderByType()==OrderByType.Area) {
+			sbSelect.append("order by h.area asc\n");
+		}else{
+			sbSelect.append("order by h.monthrent asc\n");
+		}
+		
+		Number totalCount;
+		try{
+			totalCount=(Number)JdbcUtils.querySingle(sbSelect.toString(), listParams.toArray());
+		}
+		catch(SQLException e){
+			throw new RuntimeException(e);
+		}
+		
+		result.setTotalCount(totalCount.longValue());
+		
+		sbSelect.append("limit ?,?\n");
+		listParams.add((options.getPageIndex()-1)*options.getPageSize());
+		listParams.add(options.getPageSize());
+		
+		ArrayList<HouseDTO> houses=new ArrayList<>();
+		ResultSet rs=null;
+		try{
+			rs=JdbcUtils.executeQuery(sbSelect.toString(), listParams.toArray());
+			while(rs.next()){
+				houses.add(toDTO(rs));
+			}
+			result.setHouses(houses.toArray(new HouseDTO[houses.size()]));
+		}
+		catch(SQLException e){
+			throw new RuntimeException(e);
+		}
+		finally{
+			JdbcUtils.closeAll(rs);
+		}
+		return result;
+	}
 
 }

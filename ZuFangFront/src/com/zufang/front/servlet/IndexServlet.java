@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.zufang.dto.CityDTO;
 import com.zufang.front.utils.CacheManager;
+import com.zufang.front.utils.FrontUtils;
 import com.zufang.service.CityService;
 import com.zufang.service.HouseAppointmentService;
+import com.zufang.tools.AjaxResult;
 
 @WebServlet("/Index")
 public class IndexServlet extends BasicServlet {
@@ -36,6 +38,12 @@ public class IndexServlet extends BasicServlet {
 		}
 		req.setAttribute("houseAppTotalCount", houseAppTotalCount);
 		req.getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
+	}
+	
+	public void getCurrentCity(HttpServletRequest req,HttpServletResponse resp) throws IOException{
+		long cityId=FrontUtils.getCurrentUserId(req);
+		String cityName=new CityService().getById(cityId).getName();
+		writeJson(resp, new AjaxResult("ok", null, cityName));
 	}
 	
 }

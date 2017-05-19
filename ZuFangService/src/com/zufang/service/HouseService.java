@@ -10,6 +10,8 @@ import com.zufang.dao.HouseDAO;
 import com.zufang.dao.utils.JdbcUtils;
 import com.zufang.dto.HouseDTO;
 import com.zufang.dto.HousePicDTO;
+import com.zufang.dto.HouseSearchOptions;
+import com.zufang.dto.HouseSearchResult;
 
 public class HouseService {
 	
@@ -53,5 +55,9 @@ public class HouseService {
 
 	public void deleteHousePic(long housePicId) {
 		dao.deleteHousePic(housePicId);
+	}
+	
+	public HouseSearchResult search(HouseSearchOptions options){
+		return dao.search(options);
 	}
 }

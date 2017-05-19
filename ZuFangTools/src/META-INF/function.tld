@@ -18,5 +18,13 @@
     <function-signature>java.lang.Boolean contains(java.lang.Object,java.lang.Object)</function-signature>  
     <example>${fns:contains(["12"],"12")}</example>  
   </function> 
+  
+   <function>  
+    <description>增加键值对</description>  
+    <name>addQueryStringPart</name>  
+    <function-class>com.zufang.tools.Functions</function-class>  
+    <function-signature>java.lang.String addQueryStringPart(java.lang.String,java.lang.String,java.lang.String)</function-signature>  
+    <example></example>  
+  </function> 
    
  </taglib>  

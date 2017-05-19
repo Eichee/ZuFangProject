@@ -1,5 +1,8 @@
 package com.zufang.tools;
 
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
+
 public class Functions {
 	
 	/**
@@ -28,5 +31,32 @@ public class Functions {
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * 再queryString后面增加一个键值对
+	 * @param queryString
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public static String addQueryStringPart(String queryString,String key,String value){
+		LinkedHashMap<String, String> map=new LinkedHashMap<>();
+		String[] segments=queryString.split("&");
+		for (String segment : segments) {
+			String[] strs=segment.split("=");
+			String segName=strs[0];
+			String segValue=strs[1];
+			map.put(segName, segValue);
+		}
+		map.put(key, value);
+		StringBuilder sb=new StringBuilder();
+		for (Entry<String, String> entry : map.entrySet()) {
+			sb.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
+		}
+		if (sb.charAt(sb.length()-1)=='&') {
+			sb.delete(sb.length()-1, sb.length());
+		}
+		return sb.toString();
 	}
 }
