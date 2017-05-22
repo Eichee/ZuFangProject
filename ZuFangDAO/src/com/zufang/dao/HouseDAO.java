@@ -332,7 +332,7 @@ public class HouseDAO {
 		
 		if (!StringUtils.isEmpty(options.getKeywords())) {
 			sbSelect.append(" and community.Name like ?\n");
-			listParams.add("%"+options.getKeywords()+"%");
+			listParams.add("'%"+options.getKeywords()+"%'");
 		}
 		
 		if (options.getRegionId()!=null) {
@@ -359,7 +359,10 @@ public class HouseDAO {
 			throw new RuntimeException(e);
 		}
 		
-		result.setTotalCount(totalCount.longValue());
+		if (totalCount!=null) {
+			result.setTotalCount(totalCount.longValue());
+		}
+		
 		
 		sbSelect.append("limit ?,?\n");
 		listParams.add((options.getPageIndex()-1)*options.getPageSize());

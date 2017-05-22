@@ -21,7 +21,7 @@ public class HouseAppointmentDAO {
 		sb.append(" select count(1) from t_houseappointments app");
 		Number number;
 		try{
-			number=(Number)JdbcUtils.executeQuery(sb.toString());			
+			number=(Number)JdbcUtils.querySingle(sb.toString());			
 		}
 		catch(SQLException e){
 			throw new RuntimeException(e);

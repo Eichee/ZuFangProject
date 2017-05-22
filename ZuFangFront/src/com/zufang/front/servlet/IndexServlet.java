@@ -33,7 +33,7 @@ public class IndexServlet extends BasicServlet {
 		Long houseAppTotalCount=(Long)cacheManager.getValue(houseAppTotalCountKey, Long.class);
 		if (houseAppTotalCount==null) {
 			HouseAppointmentService houseAppService=new HouseAppointmentService();
-			houseAppTotalCount=houseAppService.getTotalCount();
+			houseAppTotalCount=houseAppService.getTotalCount()+123456;
 			cacheManager.setValue(houseAppTotalCountKey, houseAppTotalCount, 60);
 		}
 		req.setAttribute("houseAppTotalCount", houseAppTotalCount);
@@ -41,7 +41,7 @@ public class IndexServlet extends BasicServlet {
 	}
 	
 	public void getCurrentCity(HttpServletRequest req,HttpServletResponse resp) throws IOException{
-		long cityId=FrontUtils.getCurrentUserId(req);
+		long cityId=FrontUtils.getCurrentCityId(req);
 		String cityName=new CityService().getById(cityId).getName();
 		writeJson(resp, new AjaxResult("ok", null, cityName));
 	}
